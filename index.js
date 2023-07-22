@@ -6,7 +6,7 @@ const ejs = require('ejs')
 
 
 app.use(express.urlencoded({ extended: true }))
-app.use('view engine', 'ejs')
+app.set('view engine', 'ejs')
 
 mongoose.connect('mongodb://127.0.0.1:27017/test')
     .then(() => {
@@ -23,4 +23,4 @@ app.get("/", (req, res) => {
 
 
 
-app.listen(3000, () => console.log("LISTENING FROM PORT 3000"))
+app.listen(3000, () => { console.log("LISTENING FROM PORT 3000") })
