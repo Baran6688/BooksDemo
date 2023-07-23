@@ -45,10 +45,11 @@ app.get("/new", (req, res) => {
 
 app.post("/new", async (req, res) => {
     const { name, author, date } = req.body
-    console.log(`Name is: ${name} and Author is ${author} and ${date}`)
+
+
     const newBook = await new Book(req.body)
     await newBook.save()
-    res.redirect("/")
+    res.redirect(`/show/${newBook.id}`)
 
 })
 
@@ -59,11 +60,31 @@ app.get("/show/:id", async (req, res) => {
     res.render("showBook", book)
 })
 
+app.get("/edit/:id", async (req, res) => {
+    const { id } = req.params
+    const book = await Book.findById(id)
+    console.log(book)
+    res.render("editBook", book)
+})
+
+app.patch("/edit/:id", async (req, res) => {
+    const { id } = req.params
+    console.log(req.body)
+    const book = await Book.findByIdAndUpdate(id, req.body)
+    console.log(book)
+    await book.save()
+    res.redirect(`/show/${id}`)
+
+})
+
 app.delete("/delete/:id", async (req, res) => {
     const { id } = req.params
     await Book.findByIdAndDelete(id)
+
     res.redirect("/")
 })
+
+
 
 
 app.listen(3000, () => { console.log("LISTENING FROM PORT 3000") })
