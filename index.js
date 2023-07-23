@@ -47,5 +47,12 @@ app.post("/new", async (req, res) => {
 
 })
 
+app.get("/show/:id", async (req, res) => {
+    const { id } = req.params
+    const book = await Book.findById(id)
+    console.log(book)
+    res.render("showBook", book)
+})
+
 
 app.listen(3000, () => { console.log("LISTENING FROM PORT 3000") })
