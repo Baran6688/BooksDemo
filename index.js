@@ -1,13 +1,14 @@
+// Requiring Dependancies
 const express = require("express")
 const app = express()
 const mongoose = require("mongoose")
 const path = require("path")
-const ejs = require('ejs')
 const methodOverride = require("method-override")
 const Book = require("./models/book")
+const engine = require('ejs-mate')
 
 
-
+// Connecting MongoDB by Mongoose
 mongoose.connect('mongodb://127.0.0.1:27017/test')
     .then(() => {
         console.log("Connected to MongoDb")
@@ -17,11 +18,15 @@ mongoose.connect('mongodb://127.0.0.1:27017/test')
 
 
 
-
-app.use(express.urlencoded({ extended: true }))
+// ejs stuff
+app.set('views', __dirname + '/views')
+app.engine('ejs', engine)
 app.set('view engine', 'ejs')
-app.set('views', path.join(__dirname, 'views'))
+
+
+// req.body requirements and Method Override
 app.use(methodOverride('_method'))
+app.use(express.urlencoded({ extended: true }))
 
 
 
@@ -50,7 +55,7 @@ app.post("/new", async (req, res) => {
 app.get("/show/:id", async (req, res) => {
     const { id } = req.params
     const book = await Book.findById(id)
-    console.log(book)
+
     res.render("showBook", book)
 })
 
