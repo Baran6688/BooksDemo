@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button><a href="/new" style="text-decoration: none; color: black;">New Book</a></button>
+
+    <% const options={ year: "numeric" , month: "short" , day: "numeric" } %>
+
+        <% for( let book of books ) { %>
+            <h1> Book: <%= book.name %>
+            </h1>
+            <h2> Author: <%= book.author %>
+            </h2>
+            <h2> Release Date: <%= book.date.toLocaleString('en-US',options) %>
+            </h2>
+            <h2>Pages: <%= book.pages %> Pages</h2>
+            <hr>
+
+            <% } %>
+
+</body>
+
+</html>
