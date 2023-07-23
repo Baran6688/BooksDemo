@@ -54,5 +54,11 @@ app.get("/show/:id", async (req, res) => {
     res.render("showBook", book)
 })
 
+app.delete("/delete/:id", async (req, res) => {
+    const { id } = req.params
+    await Book.findByIdAndDelete(id)
+    res.redirect("/")
+})
+
 
 app.listen(3000, () => { console.log("LISTENING FROM PORT 3000") })
