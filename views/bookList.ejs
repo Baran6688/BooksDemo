@@ -1,13 +1,31 @@
 <%- layout('layout/boiler') %>
-    <button><a href="/new" style="text-decoration: none; color: black;">New Book</a></button>
+
+    <ul style="list-style-type: none;">
 
 
-    <% for( let book of books ) { %>
-        <h1> Book: <a style="text-decoration: none; color: black;" href="/show/<%= book.id %>">
-                <%= book.name %>
-            </a>
-        </h1>
+        <% for( let book of books ) { %>
 
-        <hr>
 
-        <% } %>
+            <div class="uk-animation-toggle " tabindex="0">
+
+                <div>
+                    <li class="uk-animation-scale-up uk-margin-small-bottom">
+
+
+                        <a href="/show/<%= book.id %>" style="color: black; text-decoration: black;">
+                            <%= book.name %>
+                        </a>
+
+
+
+                    </li>
+                </div>
+
+            </div>
+
+
+
+
+            <% } %>
+
+    </ul>

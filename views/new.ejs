@@ -1,13 +1,38 @@
 <%- layout('layout/boiler') %>
 
-    <form action="/new" method="post">
-        <label for="name">Name: </label>
-        <input type="text" name="name" id="name">
-        <label for="Author">Author: </label>
-        <input type="text" name="author" id="Author">
-        <label for="date">Date: </label>
-        <input type="date" name="date" id="date">
-        <label for="pages">Pages</label>
-        <input type="number" id="pages" name="pages">
-        <button type="submit">Submit</button>
+
+
+
+
+    <form action="/new" class="ui form grid" method="post">
+        <div class="uk-margin">
+            <label for="name">Name: </label>
+            <input type="text" name="name" id="name" class="uk-input">
+        </div>
+        <div class="uk-margin">
+            <label for="Author">Author: </label>
+            <input type="text" name="author" id="Author" class="uk-input">
+        </div>
+
+        <div class="uk-margin">
+
+            <label for="description">Author: </label>
+            <textarea class="uk-textarea" rows="5" id="description" placeholder="Description" aria-label="Description"
+                name="description"></textarea>
+        </div>
+
+        <div class="uk-margin">
+            <label for="date">Date: </label>
+            <input type="date" name="date" id="date" class="uk-input">
+        </div>
+
+        <div class="uk-margin">
+            <label for="pages">Pages</label>
+            <input type="number" id="pages" name="pages" class="uk-input">
+        </div>
+        <div class="uk-margin">
+            <button type="submit" class=" uk-button uk-button-primary uk-margin-small-top primary">Submit</button>
+        </div>
+
+
     </form>

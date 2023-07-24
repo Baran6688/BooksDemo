@@ -5,10 +5,11 @@ const Schema = mongoose.Schema
 const Model = mongoose.model
 
 const bookSchema = new Schema({
-    name: String,
-    author: String,
-    date: Date,
-    pages: Number
+    name: { type: String, required: true },
+    author: { type: String, required: true },
+    date: { type: Date, required: true },
+    pages: { type: Number, required: true },
+    description: { type: String, required: true }
 
 })
 

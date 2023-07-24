@@ -24,9 +24,10 @@ app.engine('ejs', engine)
 app.set('view engine', 'ejs')
 
 
-// req.body requirements and Method Override
+// req.body requirements, Method Override and Public Directory 
 app.use(methodOverride('_method'))
 app.use(express.urlencoded({ extended: true }))
+app.use(express.static(path.join(__dirname, 'public')))
 
 
 
@@ -44,7 +45,7 @@ app.get("/new", (req, res) => {
 
 
 app.post("/new", async (req, res) => {
-    const { name, author, date } = req.body
+
 
 
     const newBook = await new Book(req.body)
@@ -63,15 +64,15 @@ app.get("/show/:id", async (req, res) => {
 app.get("/edit/:id", async (req, res) => {
     const { id } = req.params
     const book = await Book.findById(id)
-    console.log(book)
+
     res.render("editBook", book)
 })
 
 app.patch("/edit/:id", async (req, res) => {
     const { id } = req.params
-    console.log(req.body)
+
     const book = await Book.findByIdAndUpdate(id, req.body)
-    console.log(book)
+
     await book.save()
     res.redirect(`/show/${id}`)
 

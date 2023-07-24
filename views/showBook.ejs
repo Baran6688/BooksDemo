@@ -4,22 +4,47 @@
 
 
 
-        <h1>Name: <%= name %>
-        </h1>
-        <h1>Author: <%= author %>
-        </h1>
-        <h1>Date: <%= date.toLocaleString('en-US',options) %>
-        </h1>
-        <h1>Pages: <%= pages.toLocaleString() %>
-        </h1>
-        <div>
+
+        <div class="uk-cover-container">
+
+            <div class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light"
+                data-src="https://wallpaperaccess.com/full/7351370.jpg" uk-img="loading: eager">
+                <h1>
+                    <%= name %>
+                </h1>
+            </div>
 
 
 
+            <article class="uk-article">
 
-            <form action="/delete/<%=id%>?_method=delete" method="post">
-                <button><a href="/" style="text-decoration: none; color: black;">Back</a></button>
-                <button><a href="/edit/<%= id %>" style="text-decoration: none; color: black;">Edit</a></button>
-                <button type="submit">Delete</button>
-            </form>
+                <h1 class="uk-article-title">
+                    <%= name %>
+                </h1>
+
+                <p class="uk-article-meta">Written by <a href="#">
+                        <%= author %>
+                    </a>
+                    <%= date.toLocaleString('en-US',options) %>
+                </p>
+
+                <p class="uk-text-lead">
+                    <%= description %>
+                </p>
+
+
+
+            </article>
+
+
+
+            <div class="uk-margin-small-top">
+                <form action="/delete/<%=id%>?_method=delete" method="post">
+                    <a class="uk-button uk-button-primary" href="/">Back</a>
+                    <a class=" uk-button uk-button-primary" href="/edit/<%= id %>">Edit</a>
+                    <button class="uk-button uk-button-primary" type="submit">Delete</button>
+
+                </form>
+
+            </div>
         </div>

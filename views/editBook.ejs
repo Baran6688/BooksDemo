@@ -7,15 +7,35 @@
                     <% const Month=editMonth.toString().padStart(2,'0') %>
                         <% const Day=date.getDate().toString().padStart(2,'0') %>
         </div>
-        <form action="/edit/<%= id %>?_method=patch" method="post">
-            <%= Year %>-<%=date.getMonth()+1%>-<%= Day%>
-                        <label for="name">Name: </label>
-                        <input type="text" name="name" id="name" value="<%= name %>">
-                        <label for="Author">Author: </label>
-                        <input type="text" name="author" id="Author" value="<%= author %>">
-                        <label for="date">Date: </label>
-                        <input type="date" name="date" id="date" value="<%=Year%>-<%=Month%>-<%=Day%>">
-                        <label for="pages">Pages</label>
-                        <input type="number" id="pages" name="pages" value="<%=pages %>">
-                        <button type=" submit">Submit</button>
+
+
+
+        <form class="ui form grid" action="/edit/<%= id %>?_method=patch" method="post">
+            <div class="uk-margin">
+                <label for="name">Name: </label>
+                <input type="text" name="name" id="name" class="uk-input" value="<%= name %>">
+            </div>
+            <div class="uk-margin">
+                <label for="Author">Author: </label>
+                <input type="text" name="author" id="Author" class="uk-input" value="<%= author  %>">
+            </div>
+            <div class="uk-margin">
+
+                <label for="description">Author: </label>
+                <textarea class="uk-textarea" rows="5" id="description" placeholder="Description"
+                    aria-label="Description" name="description"><%=description %></textarea>
+            </div>
+
+            <div class="uk-margin">
+                <label for="date">Date: </label>
+                <input type="date" name="date" id="date" class="uk-input" value="<%=Year%>-<%=Month%>-<%=Day%>">
+            </div>
+
+            <div class="uk-margin">
+                <label for="pages">Pages</label>
+                <input type="number" id="pages" name="pages" class="uk-input" value="<%= pages %>">
+            </div>
+            <div class="uk-margin">
+                <button type="submit" class=" uk-button uk-button-primary uk-margin-small-top primary">Submit</button>
+            </div>
         </form>
