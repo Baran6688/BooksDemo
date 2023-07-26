@@ -31,6 +31,10 @@
                 <p class="uk-text-lead">
                     <%= description %>
                 </p>
+                <p>
+                    Posted By <%= user.name %> at <%= datePosted.toLocaleString('en-US',{...options, hour: "numeric" ,
+                            minute:"numeric" }) %>
+                </p>
 
 
 

@@ -9,7 +9,9 @@ const bookSchema = new Schema({
     author: { type: String, required: true },
     date: { type: Date, required: true },
     pages: { type: Number, required: true },
-    description: { type: String, required: true }
+    description: { type: String, required: true },
+    user: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    datePosted: { type: Date, default: Date.now() }
 
 })
 
