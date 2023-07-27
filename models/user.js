@@ -7,9 +7,20 @@ const passportLocalMongoose = require("passport-local-mongoose")
 
 const userSchema = new Schema({
     name: String,
-    posts: { type: [Schema.Types.ObjectId], ref: "Book" }
+    posts: { type: [Schema.Types.ObjectId], ref: "Book" },
+
+
+
+    // statics: {
+    //     findByName(name) {
+    //         return this.find({ name: new RegExp(name, 'i') });
+    //     }
+    // }
 
 })
+
+
+
 userSchema.plugin(passportLocalMongoose)
 
 

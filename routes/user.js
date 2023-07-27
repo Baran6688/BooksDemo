@@ -1,10 +1,8 @@
 const express = require("express")
 const router = express.Router()
 const User = require("../models/user")
-
-const Book = require("../models/book")
 const passport = require('passport')
-const localStrategy = require('passport-local')
+
 
 
 
@@ -55,5 +53,12 @@ router.get('/logout', async (req, res) => {
     });
 
 });
+
+
+router.get("/account/:id", async (req, res) => {
+    const { id } = req.params
+    const theUser = await User.findById(id).populate("posts")
+    res.render("UserPosts", { theUser })
+})
 
 module.exports = router

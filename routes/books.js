@@ -20,7 +20,10 @@ router.get("/new", isLoggedIn, (req, res) => {
 
 router.post("/new", isLoggedIn, async (req, res) => {
 
+
     const newBook = await new Book({ ...req.body, user: req.user.id })
+    newBook.Adduserfor(req.user)
+
     await newBook.save()
     res.redirect(`/show/${newBook.id}`)
 
