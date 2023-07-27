@@ -25,6 +25,7 @@
 <body>
 
 
+
     <nav class="uk-navbar-container uk-navbar-transparent">
         <div class="uk-container">
             <div uk-navbar>
@@ -41,18 +42,25 @@
                 <div class="uk-navbar-right">
 
                     <ul class="uk-navbar-nav">
-                        <li><a href="/login">Login</a></li>
-                        <li>
-                            <a href="#">Name</a>
-                            <div class="uk-navbar-dropdown">
-                                <ul class="uk-nav uk-navbar-dropdown-nav">
-                                    <li> <a href="#">Account</a></li>
-                                    <li> <a href="#">Setings</a></li>
+                        <% if(currentUser){ %>
+                            <li>
+                                <a href="#">
+                                    <%= currentUser.name %>
+                                </a>
+                                <div class="uk-navbar-dropdown">
+                                    <ul class="uk-nav uk-navbar-dropdown-nav">
+                                        <li> <a href="#">Account</a></li>
+                                        <li> <a href="#">Setings</a></li>
+                                        <li> <a href="/logout">Log Out</a></li>
 
-                                </ul>
-                            </div>
-                        </li>
-                        <li><a href="/register">Register</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <% } else if(!currentUser) { %>
+                                <li><a href="/login">Login</a></li>
+                                <li><a href="/register">Register</a></li>
+                                <% } %>
                     </ul>
 
                 </div>

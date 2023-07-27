@@ -4,13 +4,11 @@ const app = express()
 const mongoose = require("mongoose")
 const path = require("path")
 const methodOverride = require("method-override")
-const Book = require("./models/book")
 const engine = require('ejs-mate')
 const session = require("express-session")
 const passport = require('passport')
 const localStrategy = require('passport-local')
 const User = require("./models/user")
-const { isLoggedIn, isBookuser } = require("./middleware")
 
 
 
@@ -68,110 +66,13 @@ app.use((req, res, next) => {
 
 
 
-// const isBookuser = async (req, res, next) => {
-//     const { id } = req.params
-//     const book = await Book.findById(id)
-//     if (book.user !== req.user.id) {
-//         return res.redirect(`/show/${id}`)
-//     }
-//     next()
-// }
 
+// Routes
+userRoute = require("./routes/user")
+app.use("/", userRoute)
 
-
-
-
-app.get("/", async (req, res) => {
-    const books = await Book.find()
-
-    res.render("bookList", { books })
-})
-
-
-app.get('/register', (req, res) => {
-    res.render("register")
-    console.log(req.user)
-})
-
-
-
-
-app.post('/register', async (req, res) => {
-    try {
-        const { name, username, password } = req.body
-        const newUser = await new User({ name, username })
-        const registerUser = await User.register(newUser, password)
-
-        res.redirect('/')
-    } catch (e) {
-        res.redirect('/register')
-    }
-
-})
-
-app.get("/login", (req, res) => {
-    res.render("login")
-
-})
-
-
-app.post('/login', passport.authenticate('local', { failureRedirect: '/login' }), (req, res) => {
-    res.redirect('/');
-});
-
-
-app.get('/logout', async (req, res) => {
-    req.logout(function (err) {
-        if (err) { return next(err); }
-        res.redirect('/');
-    });
-
-});
-
-app.get("/new", isLoggedIn, (req, res) => {
-
-    res.render("new")
-})
-
-
-app.post("/new", isLoggedIn, async (req, res) => {
-
-    const newBook = await new Book({ ...req.body, user: req.user.id })
-    await newBook.save()
-    res.redirect(`/show/${newBook.id}`)
-
-})
-
-app.get("/show/:id", async (req, res) => {
-    const { id } = req.params
-    const book = await Book.findById(id).populate("user")
-
-    res.render("showBook", book)
-})
-
-app.get("/edit/:id", isLoggedIn, isBookuser, async (req, res) => {
-    const { id } = req.params
-    const book = await Book.findById(id)
-
-    res.render("editBook", book)
-})
-
-app.patch("/edit/:id", isLoggedIn, isBookuser, async (req, res) => {
-    const { id } = req.params
-
-    const book = await Book.findByIdAndUpdate(id, req.body)
-
-    await book.save()
-    res.redirect(`/show/${id}`)
-
-})
-
-app.delete("/delete/:id", isLoggedIn, isBookuser, async (req, res) => {
-    const { id } = req.params
-    await Book.findByIdAndDelete(id)
-
-    res.redirect("/")
-})
+bookRoute = require("./routes/books")
+app.use("/", bookRoute)
 
 
 
