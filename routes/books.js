@@ -13,41 +13,32 @@ router.get("/", async (req, res) => {
 
 
 router.get("/new", isLoggedIn, (req, res) => {
-
     res.render("new")
 })
 
 
 router.post("/new", isLoggedIn, async (req, res) => {
-
-
     const newBook = await new Book({ ...req.body, user: req.user.id })
-    newBook.Adduserfor(req.user)
-
+    await newBook.Adduserfor(req.user.id)
     await newBook.save()
     res.redirect(`/show/${newBook.id}`)
-
 })
 
 router.get("/show/:id", async (req, res) => {
     const { id } = req.params
     const book = await Book.findById(id).populate("user")
-
     res.render("showBook", book)
 })
 
 router.get("/edit/:id", isLoggedIn, isBookuser, async (req, res) => {
     const { id } = req.params
     const book = await Book.findById(id)
-
     res.render("editBook", book)
 })
 
 router.patch("/edit/:id", isLoggedIn, isBookuser, async (req, res) => {
     const { id } = req.params
-
     const book = await Book.findByIdAndUpdate(id, req.body)
-
     await book.save()
     res.redirect(`/show/${id}`)
 
@@ -56,7 +47,6 @@ router.patch("/edit/:id", isLoggedIn, isBookuser, async (req, res) => {
 router.delete("/delete/:id", isLoggedIn, isBookuser, async (req, res) => {
     const { id } = req.params
     await Book.findByIdAndDelete(id)
-
     res.redirect("/")
 })
 
