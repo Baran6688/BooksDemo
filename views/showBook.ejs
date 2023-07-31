@@ -8,10 +8,8 @@
         <div class="uk-cover-container">
 
             <div class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light"
-                data-src="https://wallpaperaccess.com/full/7351370.jpg" uk-img="loading: eager">
-                <h1>
-                    <%= name %>
-                </h1>
+                data-src="<%= image %>" uk-img="loading: eager">
+
             </div>
 
 
@@ -24,7 +22,7 @@
 
                 <p class="uk-article-meta">Written by <a href="#">
                         <%= author %>
-                    </a>
+                    </a> in
                     <%= date.toLocaleString('en-US',options) %>
                 </p>
 
@@ -41,13 +39,13 @@
             </article>
 
 
-
             <div class="uk-margin-small-top">
                 <form action="/delete/<%=id%>?_method=delete" method="post">
                     <a class="uk-button uk-button-primary" href="/">Back</a>
-                    <a class=" uk-button uk-button-primary" href="/edit/<%= id %>">Edit</a>
-                    <button class="uk-button uk-button-primary" type="submit">Delete</button>
-
+                    <% if( currentUser &&currentUser.username===user.username) {%>
+                        <a class=" uk-button uk-button-primary" href="/edit/<%= id %>">Edit</a>
+                        <button class="uk-button uk-button-primary" type="submit">Delete</button>
+                        <% } %>
                 </form>
 
             </div>

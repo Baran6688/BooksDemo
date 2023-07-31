@@ -12,7 +12,8 @@ const bookSchema = new Schema({
     pages: { type: Number, required: true },
     description: { type: String, required: true },
     user: { type: Schema.Types.ObjectId, ref: "User", required: true },
-    datePosted: { type: Date, default: Date.now() }
+    datePosted: { type: Date, default: Date.now() },
+    image: { type: String, required: true }
 
 })
 

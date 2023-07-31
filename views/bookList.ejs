@@ -1,31 +1,50 @@
 <%- layout('layout/boiler') %>
 
-    <ul style="list-style-type: none;">
+    <!-- <ul style="list-style-type: none;"> -->
 
 
+    <div class="uk-flex">
         <% for( let book of books ) { %>
 
-
+            <!-- <div class=""> -->
             <div class="uk-animation-toggle " tabindex="0">
 
-                <div>
-                    <li class="uk-animation-scale-up uk-margin-small-bottom">
+                <div class="uk-animation-fade uk-card uk-card-default  uk-margin-large-left">
+
+                    <!-- <div class="uk-child-width-1-2@m" uk-grid> -->
+                    <!-- <div> -->
 
 
-                        <a href="/show/<%= book.id %>" style="color: black; text-decoration: black;">
-                            <%= book.name %>
-                        </a>
+                    <div class="uk-card-body">
+                        <h3 class="uk-card-title">
+                            <a href="/show/<%= book.id %>" style="color: black; text-decoration: black;">
+                                <%= book.name %>
+                            </a>
+                        </h3>
+                        <p>
+                            <% if(book.description.length> 55) book.description =
+                                book.description.slice(0,
+                                55)+'....'; %>
 
+                                <%= book.description %>
+                        </p>
+                        <a href="/show/<%= book.id %>" style="color: grey; text-decoration: none;">Read
+                            more</a>
+                    </div>
 
+                    <!-- </div> -->
+                    <!-- </div> -->
 
-                    </li>
                 </div>
-
             </div>
 
 
 
+            <!-- </div> -->
+
+
 
             <% } %>
+    </div>
 
-    </ul>
+    <!-- </ul> -->

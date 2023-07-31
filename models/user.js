@@ -11,12 +11,6 @@ const userSchema = new Schema({
 
 
 
-    // statics: {
-    //     findByName(name) {
-    //         return this.find({ name: new RegExp(name, 'i') });
-    //     }
-    // }
-
 })
 
 
