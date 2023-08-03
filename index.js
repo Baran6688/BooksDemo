@@ -13,7 +13,7 @@ const User = require("./models/user")
 
 
 // Connecting MongoDB by Mongoose
-mongoose.connect('mongodb://127.0.0.1:27017/test')
+mongoose.connect('mongodb+srv://baranali6688:1234@books.p6iwptq.mongodb.net/?retryWrites=true&w=majority')
     .then(() => {
         console.log("Connected to MongoDb")
     })
