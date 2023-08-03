@@ -12,16 +12,20 @@ const User = require("./models/user")
 const MongoDBStore = require('connect-mongodb-session')(session);
 
 
+mongoose.set('strictQuery', false);
 
 
 // Connecting MongoDB by Mongoose
-mongoose.connect('mongodb+srv://baranali6688:1234@books.p6iwptq.mongodb.net/?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://baranali6688:1234@books.p6iwptq.mongodb.net/?retryWrites=true&w=majority', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
     .then(() => {
         console.log("Connected to MongoDb")
     })
-    .catch(er => { console.log("Cannot connect to MONGO SERVER!!!", er) })
-
-
+    .catch(err => {
+        console.log("Cannot connect to MONGO SERVER!!!", err)
+    });
 
 
 // ejs stuff
@@ -45,19 +49,19 @@ app.use(express.static(path.join(__dirname, 'public')))
 // })
 
 
-const store = new MongoDBStore({
-    uri: 'mongodb+srv://baranali6688:1234@books.p6iwptq.mongodb.net/?retryWrites=true&w=majority',
-    collection: 'sessions',
-    ttl: 7 * 24 * 60 * 60 // 7 days in seconds
-});
+// const store = new MongoDBStore({
+//     uri: 'mongodb+srv://baranali6688:1234@books.p6iwptq.mongodb.net/?retryWrites=true&w=majority',
+//     collection: 'sessions',
+//     ttl: 7 * 24 * 60 * 60 // 7 days in seconds
+// });
 
 
-store.on("error", function (err) { console.log(err) })
+// store.on("error", function (err) { console.log(err) })
 
 
 const sessionConfing = {
     store: new MongoDBStore({
-        mongooseConnection: mongoose.connection,
+        mongooseConnection: 'mongodb+srv://baranali6688:1234@books.p6iwptq.mongodb.net/?retryWrites=true&w=majority',
         secret: 'nazanm',
         touchAfter: 24 * 60 * 60
     }),
@@ -72,7 +76,6 @@ const sessionConfing = {
     }
 }
 app.use(session(sessionConfing))
-
 app.use(passport.initialize())
 app.use(passport.session())
 passport.use(new localStrategy(User.authenticate()))
