@@ -9,7 +9,8 @@ const session = require("express-session")
 const passport = require('passport')
 const localStrategy = require('passport-local')
 const User = require("./models/user")
-const MongoDbStore = require("connect-mongo")(session)
+const MongoDBStore = require('connect-mongodb-session')(session);
+
 
 
 
@@ -37,16 +38,29 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 // Session Stuff and Passport Stuffs
 
-const store = new MongoDbStore({
-    url: 'mongodb+srv://baranali6688:1234@books.p6iwptq.mongodb.net/?retryWrites=true&w=majority',
-    secret: 'nazanm',
-    touchafter: 24 * 60 * 60
-})
+// const store = new MongoDbStore({
+//     url: mongoose.connection,
+//     secret: 'nazanm',
+//     touchAfter: 24 * 60 * 60
+// })
+
+
+const store = new MongoDBStore({
+    uri: 'mongodb+srv://baranali6688:1234@books.p6iwptq.mongodb.net/?retryWrites=true&w=majority',
+    collection: 'sessions',
+    ttl: 7 * 24 * 60 * 60 // 7 days in seconds
+});
+
+
 store.on("error", function (err) { console.log(err) })
 
 
 const sessionConfing = {
-    store: store,
+    store: new MongoDBStore({
+        mongooseConnection: mongoose.connection,
+        secret: 'nazanm',
+        touchAfter: 24 * 60 * 60
+    }),
     secret: 'nazanm',
     resave: false,
     saveUninitialized: true,
