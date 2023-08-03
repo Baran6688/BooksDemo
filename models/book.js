@@ -27,6 +27,7 @@ bookSchema.methods.Adduserfor = async function (UserId) {
 
 
 bookSchema.post('findOneAndDelete', async function (doc) {
+
     const foundUser = await User.findByIdAndUpdate(doc.user, { $pull: { posts: doc._id } });
     await foundUser.save()
 })

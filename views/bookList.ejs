@@ -1,50 +1,33 @@
 <%- layout('layout/boiler') %>
 
-    <!-- <ul style="list-style-type: none;"> -->
 
 
-    <div class="uk-flex">
+
+    <div class="uk-child-width-1-3@m uk-grid-match " uk-grid>
         <% for( let book of books ) { %>
 
-            <!-- <div class=""> -->
-            <div class="uk-animation-toggle " tabindex="0">
 
-                <div class="uk-animation-fade uk-card uk-card-default  uk-margin-large-left">
-
-                    <!-- <div class="uk-child-width-1-2@m" uk-grid> -->
-                    <!-- <div> -->
-
+            <div>
+                <div class="uk-card uk-card-default uk-card-hover">
+                    <div class="uk-card-media-top uk-background-cover uk-light" data-src="<%= book.image %>"
+                        uk-img="loading: eager" style="height: 10rem; width: 23.3rem;">
+                    </div>
 
                     <div class="uk-card-body">
                         <h3 class="uk-card-title">
-                            <a href="/show/<%= book.id %>" style="color: black; text-decoration: black;">
-                                <%= book.name %>
-                            </a>
+                            <%= book.name %>
                         </h3>
-                        <p>
-                            <% if(book.description.length> 55) book.description =
-                                book.description.slice(0,
-                                55)+'....'; %>
 
+                        <p style="font-size: smaller;">
+                            <% if(book.description.length> 80) book.description = book.description.slice(0,
+                                80)+'....'; %>
                                 <%= book.description %>
+                                    <a href="/show/<%= book.id %>" style="text-decoration: none;">Read
+                                        more</a>
                         </p>
-                        <a href="/show/<%= book.id %>" style="color: grey; text-decoration: none;">Read
-                            more</a>
                     </div>
-
-                    <!-- </div> -->
-                    <!-- </div> -->
-
                 </div>
             </div>
 
-
-
-            <!-- </div> -->
-
-
-
             <% } %>
     </div>
-
-    <!-- </ul> -->
