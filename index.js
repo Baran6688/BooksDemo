@@ -95,10 +95,10 @@ app.use((req, res, next) => {
 
 // Routes
 userRoute = require("./routes/user")
-app.use("https://books-demo-by-barham.onrender.com/", userRoute)
+app.use("/", userRoute)
 
 bookRoute = require("./routes/books")
-app.use("https://books-demo-by-barham.onrender.com/", bookRoute)
+app.use("/", bookRoute)
 
 
 
