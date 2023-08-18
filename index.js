@@ -9,14 +9,14 @@ const session = require("express-session")
 const passport = require('passport')
 const localStrategy = require('passport-local')
 const User = require("./models/user")
-const MongoDBStore = require('connect-mongodb-session')(session);
+// const MongoDBStore = require('connect-mongodb-session')(session);
 
 
 mongoose.set('strictQuery', false);
 
 
 // Connecting MongoDB by Mongoose
-mongoose.connect('mongodb+srv://baranali6688:1234@books.p6iwptq.mongodb.net/?retryWrites=true&w=majority', {
+mongoose.connect('mongodb://127.0.0.1:27017/test', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
@@ -60,11 +60,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 
 const sessionConfing = {
-    store: new MongoDBStore({
-        mongooseConnection: 'mongodb+srv://baranali6688:1234@books.p6iwptq.mongodb.net/?retryWrites=true&w=majority',
-        secret: 'nazanm',
-        touchAfter: 24 * 60 * 60
-    }),
+
     secret: 'nazanm',
     resave: false,
     saveUninitialized: true,
@@ -103,4 +99,4 @@ app.use("/", bookRoute)
 
 
 
-app.listen(8080, () => { console.log("LISTENING FROM PORT 3000") })
+app.listen(3000, () => { console.log("LISTENING FROM PORT 3000") })
